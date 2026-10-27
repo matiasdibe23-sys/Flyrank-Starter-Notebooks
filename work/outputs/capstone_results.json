@@ -1,0 +1,629 @@
+{
+  "provenance": "Extracted programmatically from the saved outputs of work/notebooks/capstone.ipynb (a real run, seed 42). Values carry the notebook's print precision (3-4 decimals). Re-running the notebook rewrites this file with full-precision values.",
+  "versions": {
+    "pandas": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "duckdb": "1.3.2"
+  },
+  "design": {
+    "train_months": [
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04"
+    ],
+    "test_months": [
+      "2026-05",
+      "2026-06"
+    ],
+    "primary_floor": 50,
+    "min_days_each_half": 7,
+    "decay_threshold": 0.8,
+    "heldout_client_fraction": 0.2,
+    "seed": 42,
+    "bootstrap_draws": 200,
+    "features": [
+      "impr_h1",
+      "ctr_h1",
+      "pos_h1",
+      "click_momentum",
+      "impr_momentum",
+      "pos_slip"
+    ]
+  },
+  "n_pages": {
+    "train": 3027,
+    "test_a": 1870,
+    "test_b": 433
+  },
+  "n_clients": {
+    "train": 20,
+    "test_a": 19,
+    "test_b": 6
+  },
+  "pages_removed_by_days_rule": {
+    "removed": 210,
+    "of": 22928
+  },
+  "metrics_by_set_month": {
+    "Test A | 2026-05": {
+      "pages": 1001,
+      "base_rate": 0.241,
+      "scorers": {
+        "Momentum rule": {
+          "ROC-AUC": 0.592,
+          "PR-AUC": 0.4054,
+          "Precision@10%": 0.54,
+          "Lift@10%": 2.2429,
+          "Lost clicks captured@10%": 0.2334
+        },
+        "Week-4 score": {
+          "ROC-AUC": 0.3847,
+          "PR-AUC": 0.1967,
+          "Precision@10%": 0.15,
+          "Lift@10%": 0.623,
+          "Lost clicks captured@10%": 0.1569
+        },
+        "Size only (H1 clicks)": {
+          "ROC-AUC": 0.4684,
+          "PR-AUC": 0.2355,
+          "Precision@10%": 0.25,
+          "Lift@10%": 1.0384,
+          "Lost clicks captured@10%": 0.3304
+        },
+        "Logistic regression": {
+          "ROC-AUC": 0.6349,
+          "PR-AUC": 0.363,
+          "Precision@10%": 0.41,
+          "Lift@10%": 1.7029,
+          "Lost clicks captured@10%": 0.1111
+        },
+        "Random Forest": {
+          "ROC-AUC": 0.683,
+          "PR-AUC": 0.4737,
+          "Precision@10%": 0.61,
+          "Lift@10%": 2.5337,
+          "Lost clicks captured@10%": 0.2326
+        },
+        "Gradient boosting": {
+          "ROC-AUC": 0.6609,
+          "PR-AUC": 0.4437,
+          "Precision@10%": 0.56,
+          "Lift@10%": 2.326,
+          "Lost clicks captured@10%": 0.2224
+        },
+        "Momentum risk x size": {
+          "ROC-AUC": 0.5828,
+          "PR-AUC": 0.3628,
+          "Precision@10%": 0.47,
+          "Lift@10%": 1.9522,
+          "Lost clicks captured@10%": 0.2792
+        },
+        "RF P(decay) x size": {
+          "ROC-AUC": 0.6103,
+          "PR-AUC": 0.3321,
+          "Precision@10%": 0.39,
+          "Lift@10%": 1.6199,
+          "Lost clicks captured@10%": 0.4022
+        }
+      }
+    },
+    "Test A | 2026-06": {
+      "pages": 869,
+      "base_rate": 0.266,
+      "scorers": {
+        "Momentum rule": {
+          "ROC-AUC": 0.6694,
+          "PR-AUC": 0.4588,
+          "Precision@10%": 0.5814,
+          "Lift@10%": 2.1872,
+          "Lost clicks captured@10%": 0.1942
+        },
+        "Week-4 score": {
+          "ROC-AUC": 0.48,
+          "PR-AUC": 0.2768,
+          "Precision@10%": 0.2791,
+          "Lift@10%": 1.0498,
+          "Lost clicks captured@10%": 0.2312
+        },
+        "Size only (H1 clicks)": {
+          "ROC-AUC": 0.4945,
+          "PR-AUC": 0.2579,
+          "Precision@10%": 0.2093,
+          "Lift@10%": 0.7874,
+          "Lost clicks captured@10%": 0.3152
+        },
+        "Logistic regression": {
+          "ROC-AUC": 0.552,
+          "PR-AUC": 0.3046,
+          "Precision@10%": 0.3256,
+          "Lift@10%": 1.2248,
+          "Lost clicks captured@10%": 0.066
+        },
+        "Random Forest": {
+          "ROC-AUC": 0.7246,
+          "PR-AUC": 0.5242,
+          "Precision@10%": 0.6163,
+          "Lift@10%": 2.3184,
+          "Lost clicks captured@10%": 0.2186
+        },
+        "Gradient boosting": {
+          "ROC-AUC": 0.6944,
+          "PR-AUC": 0.4878,
+          "Precision@10%": 0.6395,
+          "Lift@10%": 2.4059,
+          "Lost clicks captured@10%": 0.2089
+        },
+        "Momentum risk x size": {
+          "ROC-AUC": 0.6555,
+          "PR-AUC": 0.392,
+          "Precision@10%": 0.5,
+          "Lift@10%": 1.881,
+          "Lost clicks captured@10%": 0.3021
+        },
+        "RF P(decay) x size": {
+          "ROC-AUC": 0.6257,
+          "PR-AUC": 0.351,
+          "Precision@10%": 0.4302,
+          "Lift@10%": 1.6185,
+          "Lost clicks captured@10%": 0.4037
+        }
+      }
+    },
+    "Test B | 2026-06": {
+      "pages": 262,
+      "base_rate": 0.363,
+      "scorers": {
+        "Momentum rule": {
+          "ROC-AUC": 0.7778,
+          "PR-AUC": 0.6572,
+          "Precision@10%": 0.7692,
+          "Lift@10%": 2.1215,
+          "Lost clicks captured@10%": 0.2508
+        },
+        "Week-4 score": {
+          "ROC-AUC": 0.4291,
+          "PR-AUC": 0.3778,
+          "Precision@10%": 0.4231,
+          "Lift@10%": 1.1668,
+          "Lost clicks captured@10%": 0.2131
+        },
+        "Size only (H1 clicks)": {
+          "ROC-AUC": 0.4805,
+          "PR-AUC": 0.3641,
+          "Precision@10%": 0.4615,
+          "Lift@10%": 1.2729,
+          "Lost clicks captured@10%": 0.3182
+        },
+        "Logistic regression": {
+          "ROC-AUC": 0.6474,
+          "PR-AUC": 0.5669,
+          "Precision@10%": 0.6154,
+          "Lift@10%": 1.6972,
+          "Lost clicks captured@10%": 0.1164
+        },
+        "Random Forest": {
+          "ROC-AUC": 0.789,
+          "PR-AUC": 0.7171,
+          "Precision@10%": 0.8846,
+          "Lift@10%": 2.4397,
+          "Lost clicks captured@10%": 0.2712
+        },
+        "Gradient boosting": {
+          "ROC-AUC": 0.781,
+          "PR-AUC": 0.6719,
+          "Precision@10%": 0.8846,
+          "Lift@10%": 2.4397,
+          "Lost clicks captured@10%": 0.2508
+        },
+        "Momentum risk x size": {
+          "ROC-AUC": 0.7569,
+          "PR-AUC": 0.6142,
+          "Precision@10%": 0.7308,
+          "Lift@10%": 2.0154,
+          "Lost clicks captured@10%": 0.3936
+        },
+        "RF P(decay) x size": {
+          "ROC-AUC": 0.6959,
+          "PR-AUC": 0.5382,
+          "Precision@10%": 0.5769,
+          "Lift@10%": 1.5911,
+          "Lost clicks captured@10%": 0.3571
+        }
+      }
+    }
+  },
+  "bootstrap_auc": {
+    "Test A": {
+      "clients": 19,
+      "valid_draws": 200,
+      "scorers": {
+        "Momentum rule": {
+          "ROC-AUC": 0.633,
+          "CI low": 0.598,
+          "CI high": 0.694,
+          "vs momentum": 0.0,
+          "diff CI low": 0.0,
+          "diff CI high": 0.0
+        },
+        "Week-4 score": {
+          "ROC-AUC": 0.431,
+          "CI low": 0.379,
+          "CI high": 0.482,
+          "vs momentum": -0.202,
+          "diff CI low": -0.262,
+          "diff CI high": -0.143
+        },
+        "Size only (H1 clicks)": {
+          "ROC-AUC": 0.481,
+          "CI low": 0.445,
+          "CI high": 0.549,
+          "vs momentum": -0.153,
+          "diff CI low": -0.194,
+          "diff CI high": -0.083
+        },
+        "Logistic regression": {
+          "ROC-AUC": 0.596,
+          "CI low": 0.544,
+          "CI high": 0.633,
+          "vs momentum": -0.037,
+          "diff CI low": -0.133,
+          "diff CI high": 0.013
+        },
+        "Random Forest": {
+          "ROC-AUC": 0.704,
+          "CI low": 0.633,
+          "CI high": 0.753,
+          "vs momentum": 0.071,
+          "diff CI low": 0.015,
+          "diff CI high": 0.092
+        },
+        "Gradient boosting": {
+          "ROC-AUC": 0.678,
+          "CI low": 0.614,
+          "CI high": 0.72,
+          "vs momentum": 0.044,
+          "diff CI low": -0.011,
+          "diff CI high": 0.071
+        },
+        "Momentum risk x size": {
+          "ROC-AUC": 0.621,
+          "CI low": 0.588,
+          "CI high": 0.679,
+          "vs momentum": -0.012,
+          "diff CI low": -0.025,
+          "diff CI high": -0.002
+        },
+        "RF P(decay) x size": {
+          "ROC-AUC": 0.62,
+          "CI low": 0.581,
+          "CI high": 0.674,
+          "vs momentum": -0.013,
+          "diff CI low": -0.052,
+          "diff CI high": 0.012
+        }
+      }
+    },
+    "Test B": {
+      "clients": 6,
+      "valid_draws": 200,
+      "scorers": {
+        "Momentum rule": {
+          "ROC-AUC": 0.702,
+          "CI low": 0.102,
+          "CI high": 0.722,
+          "vs momentum": 0.0,
+          "diff CI low": 0.0,
+          "diff CI high": 0.0
+        },
+        "Week-4 score": {
+          "ROC-AUC": 0.421,
+          "CI low": 0.349,
+          "CI high": 0.492,
+          "vs momentum": -0.281,
+          "diff CI low": -0.321,
+          "diff CI high": 0.331
+        },
+        "Size only (H1 clicks)": {
+          "ROC-AUC": 0.478,
+          "CI low": 0.427,
+          "CI high": 0.6,
+          "vs momentum": -0.224,
+          "diff CI low": -0.246,
+          "diff CI high": 0.468
+        },
+        "Logistic regression": {
+          "ROC-AUC": 0.684,
+          "CI low": 0.566,
+          "CI high": 0.782,
+          "vs momentum": -0.018,
+          "diff CI low": -0.046,
+          "diff CI high": 0.622
+        },
+        "Random Forest": {
+          "ROC-AUC": 0.714,
+          "CI low": 0.262,
+          "CI high": 0.731,
+          "vs momentum": 0.011,
+          "diff CI low": -0.014,
+          "diff CI high": 0.446
+        },
+        "Gradient boosting": {
+          "ROC-AUC": 0.681,
+          "CI low": 0.285,
+          "CI high": 0.7,
+          "vs momentum": -0.021,
+          "diff CI low": -0.026,
+          "diff CI high": 0.278
+        },
+        "Momentum risk x size": {
+          "ROC-AUC": 0.682,
+          "CI low": 0.292,
+          "CI high": 0.697,
+          "vs momentum": -0.02,
+          "diff CI low": -0.025,
+          "diff CI high": 0.236
+        },
+        "RF P(decay) x size": {
+          "ROC-AUC": 0.627,
+          "CI low": 0.299,
+          "CI high": 0.648,
+          "vs momentum": -0.075,
+          "diff CI low": -0.095,
+          "diff CI high": 0.617
+        }
+      }
+    }
+  },
+  "shuffled_label_sanity_auc": 0.506,
+  "leakage_negative_control": {
+    "honest_rf_auc_test_a": 0.704,
+    "rf_with_label_window_ratio_auc_test_a": 0.946,
+    "rf_with_ratio_over_month_median_auc_test_a": 1.0
+  },
+  "sensitivity": [
+    {
+      "set": "Test A",
+      "label": "adjusted",
+      "floor": 20,
+      "pages": 6780,
+      "base rate": 0.284808,
+      "Gradient boosting": 0.67,
+      "Momentum rule": 0.61,
+      "RF P(decay) x size": 0.525,
+      "Random Forest": 0.68,
+      "Size only (H1 clicks)": 0.442,
+      "Week-4 score": 0.402
+    },
+    {
+      "set": "Test A",
+      "label": "adjusted",
+      "floor": 50,
+      "pages": 1870,
+      "base rate": 0.252406,
+      "Gradient boosting": 0.678,
+      "Momentum rule": 0.633,
+      "RF P(decay) x size": 0.62,
+      "Random Forest": 0.704,
+      "Size only (H1 clicks)": 0.481,
+      "Week-4 score": 0.431
+    },
+    {
+      "set": "Test A",
+      "label": "adjusted",
+      "floor": 100,
+      "pages": 598,
+      "base rate": 0.23913,
+      "Gradient boosting": 0.685,
+      "Momentum rule": 0.676,
+      "RF P(decay) x size": 0.654,
+      "Random Forest": 0.731,
+      "Size only (H1 clicks)": 0.464,
+      "Week-4 score": 0.439
+    },
+    {
+      "set": "Test A",
+      "label": "raw",
+      "floor": 20,
+      "pages": 6780,
+      "base rate": 0.464749,
+      "Gradient boosting": 0.679,
+      "Momentum rule": 0.62,
+      "RF P(decay) x size": 0.56,
+      "Random Forest": 0.682,
+      "Size only (H1 clicks)": 0.474,
+      "Week-4 score": 0.434
+    },
+    {
+      "set": "Test A",
+      "label": "raw",
+      "floor": 50,
+      "pages": 1870,
+      "base rate": 0.426738,
+      "Gradient boosting": 0.687,
+      "Momentum rule": 0.638,
+      "RF P(decay) x size": 0.615,
+      "Random Forest": 0.701,
+      "Size only (H1 clicks)": 0.49,
+      "Week-4 score": 0.468
+    },
+    {
+      "set": "Test A",
+      "label": "raw",
+      "floor": 100,
+      "pages": 598,
+      "base rate": 0.413043,
+      "Gradient boosting": 0.694,
+      "Momentum rule": 0.687,
+      "RF P(decay) x size": 0.654,
+      "Random Forest": 0.73,
+      "Size only (H1 clicks)": 0.488,
+      "Week-4 score": 0.466
+    },
+    {
+      "set": "Test B",
+      "label": "adjusted",
+      "floor": 20,
+      "pages": 2009,
+      "base rate": 0.401195,
+      "Gradient boosting": 0.691,
+      "Momentum rule": 0.663,
+      "RF P(decay) x size": 0.572,
+      "Random Forest": 0.709,
+      "Size only (H1 clicks)": 0.465,
+      "Week-4 score": 0.391
+    },
+    {
+      "set": "Test B",
+      "label": "adjusted",
+      "floor": 50,
+      "pages": 433,
+      "base rate": 0.360277,
+      "Gradient boosting": 0.681,
+      "Momentum rule": 0.702,
+      "RF P(decay) x size": 0.627,
+      "Random Forest": 0.714,
+      "Size only (H1 clicks)": 0.478,
+      "Week-4 score": 0.421
+    },
+    {
+      "set": "Test B",
+      "label": "raw",
+      "floor": 20,
+      "pages": 2009,
+      "base rate": 0.542061,
+      "Gradient boosting": 0.724,
+      "Momentum rule": 0.684,
+      "RF P(decay) x size": 0.594,
+      "Random Forest": 0.725,
+      "Size only (H1 clicks)": 0.479,
+      "Week-4 score": 0.424
+    },
+    {
+      "set": "Test B",
+      "label": "raw",
+      "floor": 50,
+      "pages": 433,
+      "base rate": 0.501155,
+      "Gradient boosting": 0.712,
+      "Momentum rule": 0.726,
+      "RF P(decay) x size": 0.643,
+      "Random Forest": 0.726,
+      "Size only (H1 clicks)": 0.495,
+      "Week-4 score": 0.465
+    }
+  ],
+  "permutation_importance": [
+    {
+      "Feature": "impr_momentum",
+      "AUC drop": 0.0741,
+      "std": 0.0041
+    },
+    {
+      "Feature": "click_momentum",
+      "AUC drop": 0.0263,
+      "std": 0.0019
+    },
+    {
+      "Feature": "pos_slip",
+      "AUC drop": 0.0216,
+      "std": 0.0037
+    },
+    {
+      "Feature": "impr_h1",
+      "AUC drop": 0.0174,
+      "std": 0.0027
+    },
+    {
+      "Feature": "ctr_h1",
+      "AUC drop": 0.0018,
+      "std": 0.0012
+    },
+    {
+      "Feature": "pos_h1",
+      "AUC drop": 0.0009,
+      "std": 0.0009
+    }
+  ],
+  "reason_code_validation": {
+    "CLICKS_FALLING": {
+      "Share of pages flagged": 0.335,
+      "Decay rate, flagged": 0.378,
+      "Decay rate, not flagged": 0.189,
+      "Risk ratio": 1.999,
+      "Share of lost clicks in flagged": 0.451
+    },
+    "IMPRESSIONS_FALLING": {
+      "Share of pages flagged": 0.259,
+      "Decay rate, flagged": 0.445,
+      "Decay rate, not flagged": 0.185,
+      "Risk ratio": 2.409,
+      "Share of lost clicks in flagged": 0.449
+    },
+    "POSITION_SLIPPING": {
+      "Share of pages flagged": 0.382,
+      "Decay rate, flagged": 0.33,
+      "Decay rate, not flagged": 0.204,
+      "Risk ratio": 1.615,
+      "Share of lost clicks in flagged": 0.418
+    },
+    "LOW_CTR_FOR_POSITION": {
+      "Share of pages flagged": 0.235,
+      "Decay rate, flagged": 0.214,
+      "Decay rate, not flagged": 0.264,
+      "Risk ratio": 0.811,
+      "Share of lost clicks in flagged": 0.188
+    },
+    "HIGH_VOLUME": {
+      "Share of pages flagged": 0.112,
+      "Decay rate, flagged": 0.238,
+      "Decay rate, not flagged": 0.254,
+      "Risk ratio": 0.937,
+      "Share of lost clicks in flagged": 0.34
+    }
+  },
+  "tier_validation": [
+    {
+      "month": "2026-05",
+      "tier": "REVIEW_FIRST",
+      "pages": 100,
+      "Decay rate": 0.39,
+      "Share of lost clicks": 0.402
+    },
+    {
+      "month": "2026-05",
+      "tier": "WATCHLIST",
+      "pages": 200,
+      "Decay rate": 0.3,
+      "Share of lost clicks": 0.221
+    },
+    {
+      "month": "2026-05",
+      "tier": "NO_ACTION",
+      "pages": 701,
+      "Decay rate": 0.203,
+      "Share of lost clicks": 0.377
+    },
+    {
+      "month": "2026-06",
+      "tier": "REVIEW_FIRST",
+      "pages": 86,
+      "Decay rate": 0.43,
+      "Share of lost clicks": 0.404
+    },
+    {
+      "month": "2026-06",
+      "tier": "WATCHLIST",
+      "pages": 174,
+      "Decay rate": 0.356,
+      "Share of lost clicks": 0.244
+    },
+    {
+      "month": "2026-06",
+      "tier": "NO_ACTION",
+      "pages": 609,
+      "Decay rate": 0.217,
+      "Share of lost clicks": 0.352
+    }
+  ]
+}

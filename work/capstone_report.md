@@ -111,7 +111,7 @@ Reading: about 31–33% of lost clicks sit in the largest 10% of pages simply be
 
 - **Environment:** pandas 2.2.3, scikit-learn 1.6.1, DuckDB 1.3.2 (Colab run); dependencies in `requirements.txt` plus `pyarrow` for the cache files. Seed 42 throughout (client split, models, bootstrap, permutation importance).
 - **Run:** open `work/notebooks/capstone.ipynb` in Colab, add a secret named `HF_TOKEN` (read token, access to `FlyRank/internship-warehouse` approved), then *Runtime → Run all*. The first run reads six months from Hugging Face (several minutes) and caches one small table per month; a re-run takes seconds.
-- **Outputs written:** `work/outputs/capstone_results.json`, `work/outputs/capstone_queue_examples.csv`, `work/figures/fig1…fig4`.
+- **Outputs written (the example-queue CSV is regenerated locally by the notebook but gitignored by the repo rules):** `work/outputs/capstone_results.json`, `work/figures/fig1…fig4`.
 - **Design choices made after seeing June, disclosed:** the 50-click floor and the lean feature set came from the single-month W05 analysis. This is why May is the cleaner test month and every table separates the two months. No sealed-holdout claim is made.
 
 ## 9. Acknowledgments & data credit
