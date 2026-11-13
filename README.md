@@ -1,147 +1,103 @@
-# FlyRank ML Internship — Starter Repo
+# Content Decay Forecasting: which pages lose clicks next?
 
-**Applied Search Intelligence: Google Search Ranking & Discoverability**
+A time-forward test of a content-refresh queue on six months of real (pseudonymized) Google Search Console data. Built during the FlyRank ML internship, Refresh / Content Opportunity Scoring lane.
 
-This is the starting point for the FlyRank ML Internship. You **clone it into your own public
-repo** (one click — *Use this template*), build everything there, and submit that repo URL on
-each assignment in your portal — it's your workspace, your submission, and your portfolio all
-at once. The rhythm is simple: do the work, commit it, submit on the card. Done.
+**Paper:** [aidib-portfolio.vercel.app/paper](https://aidib-portfolio.vercel.app/paper/) · **Full write-up:** [`work/capstone_report.md`](work/capstone_report.md) · **Numbers:** [`work/outputs/capstone_results.json`](work/outputs/capstone_results.json)
 
-Everything here runs on a small **anonymized** slice of real FlyRank search data. No credentials,
-no private client data, no setup headaches.
+> Decision-support, not an autopilot. Everything here is observed and directional. Nothing in this repo shows that refreshing a page recovers clicks.
 
-> **New here?** Two reads: **[SETUP.md](SETUP.md)** (GitHub, Colab, and data access — ten
-> minutes, with every silent pitfall flagged), then **[GUIDE.md](GUIDE.md)** (every file
-> explained, what to edit vs. leave alone, and where your own work goes — five minutes).
+## Question
 
----
+Using only days 1-15 of a month, which pages will lose clicks in days 16-end, beyond what the typical page loses that month?
 
-## Quickstart — first win in 2 minutes
+## Results
 
-The fastest path is Google Colab (one click, zero install). Open Notebook 1 and run all cells:
+![ROC-AUC on later months, seen clients](work/figures/fig1_auc_test_a.png)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/notebooks/01_first_look_and_discovery.ipynb?flush_cache=true)
- **Week 1 — Run it, then discover a real truth yourself**
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/notebooks/02_your_first_readable_model.ipynb?flush_cache=true)
- **Week 2 — The model is just a rule you can read**
-
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/notebooks/03_working_with_the_full_release.ipynb?flush_cache=true)
- **Weeks 3+ — The full release (~79M rows) via DuckDB, no download needed** — hosted at
- [`FlyRank/internship-warehouse`](https://huggingface.co/datasets/FlyRank/internship-warehouse) (gated: request access + accept the data-use terms, approval is instant)
-
----
-
-## Your assignment notebooks — open, fill, save, done
-
-Every assignment is one pre-named skeleton notebook in `work/notebooks/`. Click its badge,
-fill the sections in order, then **File → Save a copy in GitHub → OK** — the dialog is
-already pre-filled with your repo and the right path.
-
-> **The badges know whose repo they're in.** About 30 seconds after you create your copy, an
-> automatic commit ("Point Colab badges at this copy") rewires every badge in it to open
-> **your** notebooks — with your saved work — instead of the shared read-only ones. Reading
-> this on the shared starter page? The badges below open blank previews; make your copy
-> first ([SETUP.md](SETUP.md), Moment 1).
-
-| Week | Card | Notebook | Open |
-|---|---|---|---|
-| 1 | ML-02 | `w01_research_question` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w01_research_question.ipynb?flush_cache=true) |
-| 2 | ML-03 | `w02_ml_task_framing` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w02_ml_task_framing.ipynb?flush_cache=true) |
-| 3 | ML-04 | `w03_data_contract` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w03_data_contract.ipynb?flush_cache=true) |
-| 3 | ML-05 | `w03_feature_leakage_check` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w03_feature_leakage_check.ipynb?flush_cache=true) |
-| 4 | ML-06 | `w04_signal_audit` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w04_signal_audit.ipynb?flush_cache=true) |
-| 4 | ML-07 | `w04_baseline_score` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w04_baseline_score.ipynb?flush_cache=true) |
-| 5 | ML-08 | `w05_model` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w05_model.ipynb?flush_cache=true) |
-| 6 | ML-09 | `w06_validation_audit` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w06_validation_audit.ipynb?flush_cache=true) |
-| 7 | ML-10 | `w07_action_playbook` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/w07_action_playbook.ipynb?flush_cache=true) |
-| 8 | ML-11 | `capstone` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/matiasdibe23-sys/Flyrank-Starter-Notebooks/blob/main/work/notebooks/capstone.ipynb?flush_cache=true) |
-
-Badges not opening *your* copy? Colab's built-in opener always works: **File → Open notebook
-→ GitHub tab** → paste `github.com/you/your-repo` → pick the notebook.
-
-### Prefer local?
-
-```bash
-git clone <this-repo-url>
-cd flyrank-ml-internship-starter
-pip install -r requirements.txt          # or: uv pip install -r requirements.txt
-python scripts/run_all.py
-```
-
-That runs the whole pipeline on the bundled sample and writes results to `outputs/`.
-
----
-
-## What you get
-
-| Path | What it is |
+| Finding | Evidence |
 |---|---|
-| `notebooks/` | Week 1–2 **first-win notebooks** (Colab-ready). Start here. |
-| `scripts/01–05` + `run_all.py` | The runnable reference pipeline: prepare → baseline → train → evaluate → PDF. |
-| `data/raw/content_refresh_anonymized.csv` | The anonymized starter dataset (~30k pages). |
-| `outputs/` | Example outputs so you can see the **target shape** (`model_report.md`, `refresh_queue_sample.csv`, `charts/`). |
-| `work/` | **Your space.** Lane experiments and your capstone live here — see `work/README.md`. |
-| `docs/` | The core docs + the data dictionary (see below). |
+| A Random Forest beats a one-line rule on seen clients | ROC-AUC **0.704** vs **0.633** for the click-momentum rule on 19 clients and 1,870 pages (difference +0.071, 95% client-bootstrap interval +0.015 to +0.092) |
+| It does not clearly generalize to unseen clients | On 6 unseen clients: 0.714 vs 0.702. The interval is too wide to read, so the result is **inconclusive** |
+| The older Week-4 opportunity score is not a risk ranker | ROC-AUC **0.431** (0.379-0.482), below chance. Pages it rates as high-opportunity decayed *less* than typical |
+| Size alone explains a lot of "clicks captured" | The top 10% largest pages hold 31-33% of lost clicks. The queue (P(decay) x clicks) holds ~40%, so it adds roughly 7-9 points on top of size |
+| The queue is a place to look first, not a safety net | 35-38% of lost clicks sit in the NO_ACTION tier |
 
-### Read these (in `docs/`)
+Sensitivity: the Random Forest minus momentum gap on seen clients is +0.070 / +0.071 / +0.055 at 20 / 50 / 100-click floors, and +0.062 / +0.063 / +0.043 with the raw (unadjusted) label.
 
-1. **`ml-core-foundation-framework.md`** — the first-principles map of ML as a whole system. The backbone of the live sessions.
-2. **`ml-intern-dataset-and-lane-guide.md`** — how to use the data safely, the capstone workflow, and the analysis "lanes" you can pick from.
-3. **`intern-free-tooling-guide.md`** — the zero-budget tool stack (Python, Colab, free AI assistants). You never need to pay for anything.
-4. **`data-dictionary.md`** — all 44 columns: meaning, scale, and gotchas. Keep it open while you work.
+![Share of lost clicks in the top 10%](work/figures/fig2_lost_clicks_captured.png)
 
----
+## Design
 
-## The pipeline (what `run_all.py` does)
+- **Data:** daily page performance, January-June 2026. 22,928 page-months with at least 20 clicks in days 1-15; the main analysis uses the 5,830 above a 50-click floor.
+- **Features (days 1-15 only):** `impr_h1`, `ctr_h1`, `pos_h1`, `click_momentum`, `impr_momentum`, `pos_slip`.
+- **Label (days 16-end only):** a page decays when its clicks/day fall below 80% of the typical page's ratio in the same month. A raw threshold would mistake June's market-wide second-half fall (median ratio 0.760, raw decay rate 0.566) for page decay; the adjusted label brings it to 0.288.
+- **Split:** train January-April (20 clients, 3,027 pages). **Test A:** May-June, clients seen in training (19 clients, 1,870 pages). **Test B:** May-June, clients never seen in training (6 clients, 433 pages).
+- **Baselines:** click-momentum rule, size only (clicks in days 1-15), Week-4 opportunity score.
+- **Uncertainty:** client-cluster bootstrap, 200 draws, seed 42.
 
-```text
-01_prepare_features.py   clean + build the feature vector, define the label
-02_baseline_score.py     a transparent hand-rule "fix this first" score
-03_train_model.py        logistic regression, decision tree, random forest (client-holdout split)
-04_evaluate_and_export.py  ranked queue + charts + Markdown report
-05_build_pdf_report.py   a shareable PDF summary
+## How leakage was handled
+
+1. **The first model was invalid, and the repo says so.** W05 v1 scored ROC-AUC 1.0000 because the label was a SQL rule over the model's own features. The audit is in [`work/outputs/w05_audit_report.md`](work/outputs/w05_audit_report.md).
+2. **Strict windows.** Features from days 1-15, label from days 16-end, with an assertion that no label-window column is in the feature list.
+3. **Shuffled-label control:** ROC-AUC 0.506 (expected ~0.5).
+4. **Deliberate-leak controls:** adding the label-window ratio as a feature lifts Test A from 0.704 to 0.946; adding the label's own quantity gives 1.000. The harness can detect a leak.
+5. **Disclosed selection effect:** a page is kept only with at least 7 days of data in both halves of the month. That removed 210 of 22,928 rows (0.9%), and the label uses the month's median ratio, so it can only be computed after the month ends.
+6. **Disclosed design choices:** the 50-click floor and the lean feature set came from the single-month W05 analysis, so May is the cleaner test month. No sealed-holdout claim is made.
+
+## Playbook (decision-support)
+
+Reason codes were kept only if flagged pages decayed more than unflagged ones on Test A.
+
+| Reason code | Flagged vs unflagged decay rate | Risk ratio | Verdict |
+|---|---|---|---|
+| `IMPRESSIONS_FALLING` | 0.445 vs 0.185 | 2.41 | Keep |
+| `CLICKS_FALLING` | 0.378 vs 0.189 | 2.00 | Keep |
+| `POSITION_SLIPPING` | 0.330 vs 0.204 | 1.62 | Keep |
+| `LOW_CTR_FOR_POSITION` | 0.214 vs 0.264 | 0.81 | **Dropped**: flagged pages decayed *less* |
+| `HIGH_VOLUME` | 0.238 vs 0.254 | 0.94 | Dropped as a risk code; kept as a senior-review-before-editing flag |
+
+![Decay rate by tier](work/figures/fig3_tier_decay_rate.png)
+
+**Tiers (Test A, observed):** REVIEW_FIRST (top 10%) decayed at 0.39 (May) and 0.43 (June) against base rates of 0.24 and 0.27, and holds ~40% of lost clicks. WATCHLIST: 0.30 and 0.36. NO_ACTION: 0.20 and 0.22.
+
+**Queue on the June 2026 sample panel** ([`w07_action_playbook.ipynb`](work/notebooks/w07_action_playbook.ipynb)): 4,547 pages, split into 454 REVIEW_FIRST, 910 WATCHLIST and 3,183 NO_ACTION. Of the REVIEW_FIRST pages, 218 are `HIGH_VOLUME` and 68 are `HIGH_VOLUME` with no falling or slipping code, meaning big pages to read before acting.
+
+**Human-in-the-loop (suggested team policy, not validated):** senior review before editing `HIGH_VOLUME` pages; reviewers read the reason codes and treat a page with no falling code as "big, not necessarily at risk". Landing pages, homepages and legal pages are on a no-go list for automation.
+
+**Monitoring:** track the monthly median page ratio, the adjusted decay rate, whether REVIEW_FIRST still decays above the base rate, and each code's risk ratio. Drop a code whose ratio falls to 1 or below.
+
+## Limitations
+
+- Observational data, no recorded refresh events: no causal claim.
+- 19 seen and 6 unseen clients, six months, 15-day windows and a proxy label.
+- The Random Forest's edge over the momentum rule is modest and not separable on unseen clients.
+- The queue's size term pulls large, stable pages to the top (in the May top 10, 4 of 10 pages decayed).
+
+## Repository map
+
+```
+work/
+  capstone_report.md      full write-up (numbers trace to capstone_results.json)
+  notebooks/              w01 ... w07 assignments + capstone.ipynb
+  archive/                two optional, unexecuted stretch notebooks
+  outputs/                capstone_results.json, w05_audit_report.md
+  figures/                fig1-fig4 used above
+scripts/                  FlyRank's reference pipeline (unchanged baseline)
+docs/STARTER_README.md    FlyRank's original starter instructions
+data/raw/                 FlyRank's anonymized starter slice (see DATA_USE.md)
+submission/paper_url.txt  deployed paper
 ```
 
-On the bundled sample, the learned model clearly beats the hand-written rule at picking the right
-pages to review first (**Precision@50 ≈ 0.24 → 0.74**; the model number can land 0.68–0.74
-depending on library versions — the ~3x lift is the point). The notebooks compute these numbers
-live, so they always reflect the current data and environment.
+## Reproducing
 
-**Teaching point:** the model is the capstone, but the *workflow* is the lesson —
-`problem framing → data cleaning → baseline → first model → evaluation → explainable recommendation`.
+- **Reference pipeline on the bundled slice** (no credentials): `pip install -r requirements.txt && python scripts/run_all.py`. This is FlyRank's starter pipeline, not the capstone analysis.
+- **Capstone analysis:** open [`work/notebooks/capstone.ipynb`](work/notebooks/capstone.ipynb) in Colab, add a Colab secret `HF_TOKEN` (read token), then Run all. It reads the full release from `FlyRank/internship-warehouse` on Hugging Face, which is **gated**: access must be approved first. Seed 42 throughout.
+- Versions of the saved run: pandas 2.2.3, scikit-learn 1.6.1, DuckDB 1.3.2.
 
----
+## Data and privacy
 
-## Data safety (read `DATA_USE.md`)
+Only hashed, pseudonymous ids are used, for grouping and joining, never as features. No client names, domains, URLs or queries appear anywhere in `work/`. The only dataset in the repo is the anonymized starter slice FlyRank ships, governed by [`DATA_USE.md`](DATA_USE.md); CI fails any other committed dataset.
 
-- Only the small **anonymized** CSV ships here — no client names, domains, URLs, titles, or keywords.
-- **Never** add raw private client data to this repo or your fork. Need more data? Request an approved
-  release from your mentor — never export it yourself.
-- Don't paste client data into third-party AI tools.
-- Frame every result as **observed / measured / directional / decision-support** — never
-  "I predicted Google's algorithm."
+## Credits
 
-The `.gitignore` blocks datasets by default, and CI fails any commit that includes a dataset.
-
----
-
-## Assignments & schedule
-
-Weekly assignments, live events, and the capstone live on **your portal board** (your
-enrollment email has your access link). This repo is the shared technical foundation they all
-build on — and the `skills/` folder here is the instruction library for your AI assistant
-(start at [skills/README.md](skills/README.md)).
-
-**First time with GitHub?** You need exactly four things (full walkthrough: [SETUP.md](SETUP.md)):
-1. A free account at github.com.
-2. Your own copy of this repo: **Use this template → Create a new repository** → public.
-   (One click — brings the notebooks, `work/`, and the CI leak-guard with it.)
-3. In Colab: *File → Save a copy in GitHub* — opened from your copy's badges, the dialog is
-   already pre-filled with your repo and path, so it's just OK (Colab handles auth).
-4. That's your submission repo — share its **github.com/you/your-repo** URL with Assignment 1
-   (never a colab.research.google.com or drive.google.com link).
-
----
-
-*Track leads: Mirza Ašćerić (ML) · Hole (data engineering). Code under MIT (see `LICENSE`); data under `DATA_USE.md`.*
+Built on the [FlyRank](https://flyrank.ai) ML Internship dataset and starter repo. Code is MIT-licensed; the data is governed separately by `DATA_USE.md`.
